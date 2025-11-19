@@ -8,6 +8,8 @@ import os
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 # --- HÀM LẤY PHIM PHỔ BIẾN ---
+
+
 @st.cache_data(show_spinner=False)
 def fetch_popular_movies():
     # Lấy API key từ st.secrets
@@ -31,7 +33,8 @@ def fetch_popular_movies():
                 full_path = "https://image.tmdb.org/t/p/w500/" + poster_path
                 pop_posters.append(full_path)
             else:
-                pop_posters.append("https://via.placeholder.com/500x750.png?text=No+Poster")
+                pop_posters.append(
+                    "https://via.placeholder.com/500x750.png?text=No+Poster")
 
         return pop_names, pop_posters
 
@@ -65,8 +68,10 @@ def fetch_poster(movie_id):
 # --- LOAD MODEL ĐỀ XUẤT ---
 @st.cache_resource(show_spinner=False)
 def load_data():
-    movies_master_path = os.path.join(BASE_DIR, "content_based_model", "movies_list.pkl")
-    similarity_cb_path = os.path.join(BASE_DIR, "content_based_model", "similarity.pkl")
+    movies_master_path = os.path.join(
+        BASE_DIR, "content_based_model", "movies_list.pkl")
+    similarity_cb_path = os.path.join(
+        BASE_DIR, "content_based_model", "similarity.pkl")
 
     # Kiểm tra file tồn tại
     if not os.path.exists(movies_master_path) or not os.path.exists(similarity_cb_path):

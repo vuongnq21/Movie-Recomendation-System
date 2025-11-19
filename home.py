@@ -10,6 +10,8 @@ from app import (
 )
 
 # --- Giao diện trang Home ---
+
+
 def home(conn):
 
     # --- Quản lý trạng thái phim được chọn ---
@@ -56,7 +58,8 @@ def home(conn):
         # --- Nhấn nút đề xuất ---
         if st.button("Show Recommendation", key="cb_button"):
 
-            movie_name, movie_poster, movie_id = recommend_content_based(selectvalue)
+            movie_name, movie_poster, movie_id = recommend_content_based(
+                selectvalue)
 
             if movie_name:
                 st.write("Phim đề xuất:")

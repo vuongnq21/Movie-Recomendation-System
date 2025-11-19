@@ -10,6 +10,8 @@ import user_collection
 import history
 
 # --- Kết nối database, dùng cache để giảm số lần tạo kết nối ---
+
+
 @st.cache_resource
 def init_connection():
     # Hàm khởi tạo kết nối PostgreSQL, đọc từ st.secrets
@@ -29,6 +31,7 @@ def init_connection():
             "2) Đảm bảo secrets.toml đã được thêm vào Streamlit Cloud."
         )
         return None
+
 
 # --- Lấy kết nối ---
 conn = init_connection()

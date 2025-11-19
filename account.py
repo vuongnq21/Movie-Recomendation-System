@@ -16,7 +16,8 @@ def authenticate_user(conn, username, password):
 
         # --- comment --- Nếu tìm thấy user và mật khẩu đúng
         if user:
-            if user[2] == hash_password(password):  # user[2] = password đã mã hóa trong DB
+            # user[2] = password đã mã hóa trong DB
+            if user[2] == hash_password(password):
                 return True, user[0]  # user[0] = user_id
         return False, None
 
@@ -83,7 +84,8 @@ def user_auth(conn):
             if submit_button:
                 # --- comment --- Kiểm tra đủ dữ liệu
                 if username and password:
-                    success, user_id = authenticate_user(conn, username, password)
+                    success, user_id = authenticate_user(
+                        conn, username, password)
 
                     if success:
                         # --- comment --- Lưu session khi đăng nhập thành công
@@ -93,7 +95,8 @@ def user_auth(conn):
                         st.session_state['logged_in'] = True
                         st.rerun()  # --- comment --- Reload UI để chuyển sang trạng thái đã login
                     else:
-                        st.error("Tên người dùng hoặc mật khẩu không đúng. Vui lòng thử lại.")
+                        st.error(
+                            "Tên người dùng hoặc mật khẩu không đúng. Vui lòng thử lại.")
                 else:
                     st.error("Vui lòng nhập đầy đủ tên người dùng và mật khẩu.")
 
@@ -103,7 +106,8 @@ def user_auth(conn):
         with st.form(key="register_form"):
             username = st.text_input("Tên người dùng mới")
             password = st.text_input("Mật khẩu", type="password")
-            confirm_password = st.text_input("Xác nhận mật khẩu", type="password")
+            confirm_password = st.text_input(
+                "Xác nhận mật khẩu", type="password")
             submit_button = st.form_submit_button("Đăng ký")
 
             if submit_button:
@@ -113,6 +117,7 @@ def user_auth(conn):
                     if password == confirm_password:
                         register_user(conn, username, password)
                     else:
-                        st.error("Mật khẩu và xác nhận mật khẩu không khớp. Vui lòng thử lại.")
+                        st.error(
+                            "Mật khẩu và xác nhận mật khẩu không khớp. Vui lòng thử lại.")
                 else:
                     st.error("Vui lòng nhập đầy đủ các trường.")

@@ -10,6 +10,8 @@ from app import (
 )
 
 # --- Kiểm tra phim trong bộ sưu tập ---
+
+
 def check_movie_in_collection(conn, user_id, movie_id):
     try:
         with conn.cursor() as cursor:
@@ -24,6 +26,8 @@ def check_movie_in_collection(conn, user_id, movie_id):
         return False
 
 # --- Lưu phim vào bộ sưu tập ---
+
+
 def save_to_collection(conn, user_id, movie_id, title):
     if check_movie_in_collection(conn, user_id, movie_id):
         return False, f"Phim '{title}' đã có trong bộ sưu tập!"
@@ -42,6 +46,8 @@ def save_to_collection(conn, user_id, movie_id, title):
         return False, f"Lỗi CSDL: {e}"
 
 # --- Xử lý mua phim ---
+
+
 def process_purchase(conn, user_id, movie_id, title):
     try:
         with conn.cursor() as cursor:
@@ -68,6 +74,8 @@ def process_purchase(conn, user_id, movie_id, title):
         return False, f"Lỗi CSDL: {e}"
 
 # --- Giao diện trang chi tiết phim ---
+
+
 def detail(conn):
     st.header("Movie Recommendation System")
 
@@ -102,7 +110,8 @@ def detail(conn):
 
                     movie_id_int = int(selected_tmdbId)
 
-                    success, message = process_purchase(conn, user_id, movie_id_int, selected_title)
+                    success, message = process_purchase(
+                        conn, user_id, movie_id_int, selected_title)
                     if success:
                         st.success(message)
                     else:
@@ -118,7 +127,8 @@ def detail(conn):
 
                     movie_id_int = int(selected_tmdbId)
 
-                    success, message = save_to_collection(conn, user_id, movie_id_int, selected_title)
+                    success, message = save_to_collection(
+                        conn, user_id, movie_id_int, selected_title)
                     if success:
                         st.success(message)
                     else:
@@ -144,7 +154,8 @@ def detail(conn):
     # --- Phim tương tự ---
     st.subheader("Phim tương tự")
 
-    movie_name, movie_poster, movie_id = recommend_content_based(selected_title)
+    movie_name, movie_poster, movie_id = recommend_content_based(
+        selected_title)
 
     if movie_name:
         cols_rec = st.columns(5)

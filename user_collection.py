@@ -6,10 +6,13 @@ try:
     from app import fetch_poster
 except ImportError:
     st.error("Lỗi: Không tìm thấy file 'app.py' chứa hàm 'fetch_poster'.")
+
     def fetch_poster(id):
         return "https://via.placeholder.com/500x750.png?text=Error"
 
 # --- Lấy danh sách phim trong bộ sưu tập ---
+
+
 def get_user_collection(conn, user_id):
     try:
         with conn.cursor() as cursor:
@@ -24,6 +27,8 @@ def get_user_collection(conn, user_id):
         return []
 
 # --- Xóa phim khỏi bộ sưu tập ---
+
+
 def remove_from_collection(conn, user_id, movie_id):
     try:
         with conn.cursor() as cursor:
@@ -39,6 +44,8 @@ def remove_from_collection(conn, user_id, movie_id):
         return False
 
 # --- Hiển thị bộ sưu tập yêu thích ---
+
+
 def display_collection(conn):
 
     # Kiểm tra đăng nhập
